@@ -1,4 +1,24 @@
 .table {
   width: 100%;
-  border: 1px solid var(--black);
+  border-radius: 10px;
+
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+
+.thead-collum,
+.table-collum {
+  padding: 0.5rem 1rem;
+}
+
+.table-row {
+  height: 3rem;
+  background-color: var(--light-grey);
+}
+
+.table-row:nth-of-type(even) {
+  background-color: var(--lighter-grey);
+}
+
+.table-collum {
+  padding: 0.2rem 1rem;
 }

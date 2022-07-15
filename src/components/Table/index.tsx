@@ -8,9 +8,9 @@ export function Table(props: ITable) {
       <table className='table'>
         <thead className='table-head'>
           <tr className='thead-row'>
-            <td>Symbol</td>
-            <td>Name</td>
-            <td>Price</td>
+            <td className='thead-collum'>Symbol</td>
+            <td className='thead-collum'>Name</td>
+            <td className='thead-collum'>Price</td>
           </tr>
         </thead>
         <tbody className='table-body'>{props.children}</tbody>

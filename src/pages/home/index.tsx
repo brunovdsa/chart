@@ -6,6 +6,8 @@ import { Table } from '../../components/Table';
 import { ITable } from '../../interface';
 import { API, API_KEY } from '../../services/api';
 
+import './styles.scss';
+
 export function Home() {
   const [data, setData] = useState<ITable[]>([]);
   const [symbol, setSymbol] = useState<string>('');
@@ -32,10 +34,10 @@ export function Home() {
       <Table>
         {data.map((item: any) => {
           return (
-            <tr key={item.symbol}>
-              <td>{item.symbol}</td>
-              <td>{item.name}</td>
-              <td>{item.price}</td>
+            <tr key={item.symbol} className={'table-row'}>
+              <td className={'table-collum'}>{item.symbol}</td>
+              <td className={'table-collum'}>{item.name}</td>
+              <td className={'table-collum'}>{item.price}</td>
             </tr>
           );
         })}
