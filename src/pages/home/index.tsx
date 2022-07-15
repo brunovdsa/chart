@@ -7,21 +7,20 @@ import { ITable } from '../../interface';
 import { API, API_KEY } from '../../services/api';
 
 export function Home() {
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<ITable[]>([]);
   const [symbol, setSymbol] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [price, setPrice] = useState<number>();
 
   useEffect(() => {
     API.get<ITable[]>(`/stock/list?apikey=${API_KEY}`)
       .then((res: any) => {
-        setData(res.data);
-        console.log(data);
+        const limitedData = res.data;
+        setData(limitedData.slice(0, 20));
+        setSymbol(res.data.symbol);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, [symbol]);
 
   return (
     <>
@@ -30,7 +29,17 @@ export function Home() {
         <title>Stock Exchange - Home</title>
       </Helmet>
       <Header content='Stock Exchange' />
-      <Table symbol={symbol} name={name} price={price} />
+      <Table>
+        {data.map((item: any) => {
+          return (
+            <tr key={item.symbol}>
+              <td>{item.symbol}</td>
+              <td>{item.name}</td>
+              <td>{item.price}</td>
+            </tr>
+          );
+        })}
+      </Table>
     </>
   );
 }
