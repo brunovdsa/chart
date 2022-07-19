@@ -11,8 +11,9 @@
 }
 
 .table-row {
-  height: 3rem;
+  height: 3.5rem;
   background-color: var(--light-grey);
+  font-size: 1rem;
 }
 
 .table-row:nth-of-type(even) {

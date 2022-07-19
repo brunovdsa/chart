@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Checkbox } from '../../components/Checkbox';
 
 import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
@@ -11,6 +12,8 @@ import './styles.scss';
 export function Home() {
   const [data, setData] = useState<ITable[]>([]);
   const [symbol, setSymbol] = useState<string>('');
+  const [checked, setChecked] = useState<string[]>();
+  const [companysSelected, setCompanysSelected] = useState<string[]>([]);
 
   useEffect(() => {
     API.get<ITable[]>(`/stock/list?apikey=${API_KEY}`)
@@ -23,6 +26,21 @@ export function Home() {
         console.log(err);
       });
   }, [symbol]);
+
+  const handleSelect = (e: any) => {
+    setChecked(e.target.name);
+    setCompanysSelected([e.target.name, checked]);
+  };
+
+  // const handleChange = (e: any) => {
+
+  //   // setChecked(newValue);
+  //   // props.onChange && props.onChange(newValue);
+  // };
+
+  console.log(companysSelected);
+  // const checkedClass: string = checked ? 'checked' : '';
+  // const containerClass: string = `checkbox ${checkedClass}`.trim();
 
   return (
     <>
@@ -38,6 +56,13 @@ export function Home() {
               <td className={'table-collum'}>{item.symbol}</td>
               <td className={'table-collum'}>{item.name}</td>
               <td className={'table-collum'}>{item.price}</td>
+              <td className={'table-collum'}>
+                <input
+                  className={'checkbox'}
+                  onClick={handleSelect}
+                  name={item.symbol}
+                />
+              </td>
             </tr>
           );
         })}
