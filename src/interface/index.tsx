@@ -15,8 +15,10 @@ export interface ITable {
   clasName?: string;
 }
 
-export interface ISymbol {
+export interface ICompany {
   symbol: string;
+  name: string;
+  price: number;
 }
 
 export interface ICheckbox {

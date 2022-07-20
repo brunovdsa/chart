@@ -4,14 +4,11 @@ import { ICheckbox } from '../../interface';
 import './styles.scss';
 
 export function Checkbox(props: ICheckbox) {
-  const [checked, setChecked] = useState<string[]>();
+  const [checked, setChecked] = useState<boolean>(false);
 
-  function toggle() {
-    const newValue = props.value;
-
-    setChecked(newValue);
-    props.onChange && props.onChange(newValue);
-  }
+  const toggle = () => {
+    setChecked(!checked);
+  };
 
   const checkedClass: string = checked ? 'checked' : '';
   const containerClass: string = `checkbox ${checkedClass}`.trim();
