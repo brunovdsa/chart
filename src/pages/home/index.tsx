@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
@@ -10,10 +11,7 @@ import './styles.scss';
 
 export function Home() {
   const [symbol, setSymbol] = useState<string[]>([]);
-
   const [companys, setCompanys] = useState<ICompany[]>([]);
-
-  //array de companys selecionadas
   const [checked, setChecked] = useState<string[]>([]);
 
   useEffect(() => {
@@ -37,7 +35,10 @@ export function Home() {
       updateList.splice(checked.indexOf(event.target.value), 1);
     }
     setChecked(updateList);
+    console.log(checked);
   };
+
+  console.log(checked);
 
   return (
     <>
@@ -50,20 +51,21 @@ export function Home() {
         {companys.map((company: any) => {
           return (
             <tr key={company.symbol} className={'table-row'}>
-              <td className={'table-collum'}>{company.symbol}</td>
-              <td className={'table-collum'}>{company.name}</td>
-              <td className={'table-collum'}>{company.price}</td>
-              <td className={'table-collum'}>
+              <td className='table-collum'>{company.symbol}</td>
+              <td className='table-collum'>{company.name}</td>
+              <td className='table-collum'>{company.price}</td>
+              <td className='table-collum'>
                 <input
                   className=''
                   value={company.symbol}
                   onChange={handleChecked}
-                  type={'checkbox'}
+                  type='checkbox'
                 />
               </td>
             </tr>
           );
         })}
+        <Link to={`/income-statement/${checked}`}>Compare</Link>
       </Table>
     </>
   );

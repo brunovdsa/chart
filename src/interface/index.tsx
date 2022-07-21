@@ -20,9 +20,3 @@ export interface ICompany {
   name: string;
   price: number;
 }
-
-export interface ICheckbox {
-  className?: string;
-  onChange?: (arg: string[]) => any;
-  value: string[];
-}
