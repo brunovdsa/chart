@@ -75,7 +75,7 @@ export function Home() {
               <Company
                 symbol={company.symbol}
                 name={company.name}
-                price={company.price}
+                price={`£${company.price}`}
                 handleChecked={handleChecked}
               />
             );

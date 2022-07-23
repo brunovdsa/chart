@@ -28,19 +28,32 @@
 }
 
 .compare-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background-color: var(--blue-dark-navy);
   font-size: 0.9rem;
   color: var(--grey-light);
   text-decoration: none;
-  border: 3px solid transparent;
   border-radius: 20px;
-  padding: 0.7rem;
+  padding: 0.9rem;
 }
 
 .compare-btn:active,
 .compare-btn:focus,
 .compare-btn:hover {
-  background-color: var(--grey-light);
-  border: 3px solid var(--blue-dark-navy);
-  color: var(--blue-dark-navy);
+  background: var(--blue-navy);
+}
+
+@media (min-width: 1100px) {
+  .search-inputs {
+    padding: 0.9rem;
+    width: 75%;
+  }
+
+  .compare-btn {
+    font-size: 1.1rem;
+    width: 17%;
+  }
 }

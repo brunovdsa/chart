@@ -5,3 +5,9 @@
   padding: 0rem 2rem;
   background-color: var(--grey-light);
 }
+
+@media (min-width: 1100px) {
+  .container {
+    padding: 0rem 10rem;
+  }
+}

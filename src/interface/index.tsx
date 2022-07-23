@@ -18,7 +18,7 @@ export interface ITable {
 export interface ICompany {
   symbol: string;
   name: string;
-  price: number;
+  price: number | string;
   handleChecked: ChangeEventHandler<HTMLInputElement> | undefined;
 }
 

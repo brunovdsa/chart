@@ -32,3 +32,16 @@
 .table-collum {
   padding: 0.2rem 1rem;
 }
+
+@media (min-width: 1100px) {
+  .table-head,
+  .thead-row {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .table-row {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
