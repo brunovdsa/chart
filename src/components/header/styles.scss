@@ -4,9 +4,9 @@ header {
   align-items: center;
 
   padding: 1rem auto;
-  background-color: var(--dark-grey);
+  background: var(--blue-gradient);
 
-  color: var(--light-grey);
+  color: var(--grey-light);
 }
 
 @media (min-width: 1100px) {

@@ -2,22 +2,19 @@
 
 :root {
   //COLOR PALLETE
-  --black: #0b090a;
-  --dark-grey: #161a1d;
-  --regular-grey: #b1a7a6;
-  --light-grey: #d3d3d3;
-  --lighter-grey: #f5f3f4;
-
-  --dark-red: #660708;
-  --regular-red: #ff0000;
-  --light-red: #e5383b;
+  --grey-light: #fff;
+  --grey-regular: #c4c4c4;
+  --grey-dark: #424242;
+  --blue-gradient: linear-gradient(90.16deg, #0c4251 12.73%, #219dbf 109.4%);
+  --blue-navy: #106279;
+  --blue-dark-navy: #0c4251;
 
   //FONT FAMILY
   --primary-font: 'Ubuntu', sans-serif;
 }
 
 body {
-  background-color: var(--light-grey);
+  background-color: var(--grey-light);
   font-family: var(--primary-font);
   overflow-x: hidden;
   margin: 0;

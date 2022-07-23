@@ -41,6 +41,7 @@ export function About() {
     }, 500);
   }, [id]);
 
+  console.log(data);
   return (
     <>
       <Helmet>

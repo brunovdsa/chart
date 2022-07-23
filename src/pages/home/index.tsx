@@ -1,30 +1,32 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 
+import { Container } from '../../components/Container';
+import { ICompany } from '../../interface';
 import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
-import { ICompany } from '../../interface';
 import { API, API_KEY } from '../../services/api';
+import SearchBar from '../../components/SearchBar';
+import Company from '../../components/Company';
 
 import './styles.scss';
 
 export function Home() {
-  const [symbol, setSymbol] = useState<string[]>([]);
-  const [companys, setCompanys] = useState<ICompany[]>([]);
+  const [data, setData] = useState<ICompany[]>([]);
   const [checked, setChecked] = useState<string[]>([]);
+  const [filteredData, setFilteredData] = useState<ICompany[]>([]);
+  const [wordEntered, setWordEntered] = useState<string>('');
 
   useEffect(() => {
     API.get<ICompany[]>(`/stock/list?apikey=${API_KEY}`)
       .then((res: any) => {
         const limitedData = res.data;
-        setCompanys(limitedData.slice(0, 20));
-        setSymbol(res.data.symbol);
+        setData(limitedData.slice(0, 20));
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [symbol]);
+  }, []);
 
   const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     var updateList = [...checked];
@@ -35,38 +37,51 @@ export function Home() {
       updateList.splice(checked.indexOf(event.target.value), 1);
     }
     setChecked(updateList);
-    console.log(checked);
   };
 
-  console.log(checked);
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchWord: string = event.target.value;
+    setWordEntered(searchWord);
+
+    const newFilter = data.filter((value: any) => {
+      return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === '') {
+      return setFilteredData(data);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
 
   return (
-    <>
+    <div className='home'>
       <Helmet>
         <meta charSet='utf-8' />
         <title>Stock Exchange - Home</title>
       </Helmet>
       <Header content='Stock Exchange' />
-      <Table>
-        {companys.map((company: any) => {
-          return (
-            <tr key={company.symbol} className={'table-row'}>
-              <td className='table-collum'>{company.symbol}</td>
-              <td className='table-collum'>{company.name}</td>
-              <td className='table-collum'>{company.price}</td>
-              <td className='table-collum'>
-                <input
-                  className=''
-                  value={company.symbol}
-                  onChange={handleChecked}
-                  type='checkbox'
-                />
-              </td>
-            </tr>
-          );
-        })}
-        <Link to={`/income-statement/${checked}`}>Compare</Link>
-      </Table>
-    </>
+      <Container>
+        <SearchBar
+          handleFilter={handleFilter}
+          wordEntered={wordEntered}
+          checked={checked}
+        />
+      </Container>
+      <Container>
+        <Table>
+          {filteredData.map((company: ICompany) => {
+            return (
+              <Company
+                symbol={company.symbol}
+                name={company.name}
+                price={company.price}
+                handleChecked={handleChecked}
+              />
+            );
+          })}
+        </Table>
+      </Container>
+    </div>
   );
 }
