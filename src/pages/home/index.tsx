@@ -22,11 +22,12 @@ export function Home() {
       .then((res: any) => {
         const limitedData = res.data;
         setData(limitedData.slice(0, 20));
+        setFilteredData(data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [data]);
 
   const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     var updateList = [...checked];
@@ -48,7 +49,7 @@ export function Home() {
     });
 
     if (searchWord === '') {
-      return setFilteredData(data);
+      setFilteredData(data);
     } else {
       setFilteredData(newFilter);
     }
