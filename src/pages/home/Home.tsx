@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
-import { API, API_KEY } from '../../services/api';
+import { API, API_KEY } from '../../services/api/Api';
 
-import { ICompany } from '../../interface';
+import { ICompany } from '../../interface/interface';
 
-import { Container } from '../../components/Container';
-import { Header } from '../../components/Header';
-import { Table } from '../../components/Table';
-import SearchBar from '../../components/SearchBar';
-import Company from '../../components/Company';
+import { Container } from '../../components/Container/Container';
+import { Header } from '../../components/Header/Header';
+import { Table } from '../../components/Table/Table';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import Company from '../../components/Company/Company';
 
-import './styles.scss';
+import './Home.scss';
 
 export function Home() {
   const [data, setData] = useState<ICompany[]>([]);

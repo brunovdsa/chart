@@ -1,4 +1,4 @@
-import { ICompany } from '../../interface';
+import { ICompany } from '../../interface/interface';
 
 export default function Company(props: ICompany) {
   return (

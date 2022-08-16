@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { ISearch } from '../../interface';
-import { SearchIcon } from '../ICons';
-import './styles.scss';
+import { ISearch } from '../../interface/interface';
+import { SearchIcon } from '../ICons/Icons';
+import './SearchBar.scss';
 
 export default function SearchBar(props: ISearch) {
   return (

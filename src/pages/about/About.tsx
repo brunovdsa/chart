@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import _ from 'lodash';
 
-import { Charts } from '../../components/Chart';
-import { Container } from '../../components/Container';
+import { Charts } from '../../components/Chart/Chart';
+import { Container } from '../../components/Container/Container';
 
-import { Header } from '../../components/Header';
-import { API_KEY, API_URL } from '../../services/api';
+import { Header } from '../../components/Header/Header';
+import { API_KEY, API_URL } from '../../services/api/Api';
 
 export function About() {
   const [data, setData] = useState<any>([]);

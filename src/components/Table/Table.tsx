@@ -1,5 +1,5 @@
-import { ITable } from '../../interface';
-import './styles.scss';
+import { ITable } from '../../interface/interface';
+import './Table.scss';
 
 export function Table(props: ITable) {
   return (

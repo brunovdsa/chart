@@ -1,6 +1,6 @@
-import { IHeader } from '../../interface';
+import { IHeader } from '../../interface/interface';
 
-import './styles.scss';
+import './Header.scss';
 
 export function Header(props: IHeader) {
   return (

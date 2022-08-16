@@ -1,5 +1,5 @@
 import { Chart } from 'react-google-charts';
-import { IChart } from '../../interface';
+import { IChart } from '../../interface/interface';
 
 export function Charts(props: IChart) {
   return (
