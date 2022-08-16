@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
-import { Container } from '../../components/Container';
+import { API, API_KEY } from '../../services/api';
+
 import { ICompany } from '../../interface';
+
+import { Container } from '../../components/Container';
 import { Header } from '../../components/Header';
 import { Table } from '../../components/Table';
-import { API, API_KEY } from '../../services/api';
 import SearchBar from '../../components/SearchBar';
 import Company from '../../components/Company';
 
@@ -13,44 +15,41 @@ import './styles.scss';
 
 export function Home() {
   const [data, setData] = useState<ICompany[]>([]);
-  const [checked, setChecked] = useState<string[]>([]);
   const [filteredData, setFilteredData] = useState<ICompany[]>([]);
-  const [wordEntered, setWordEntered] = useState<string>('');
+  const [checked, setChecked] = useState<string[]>([]);
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
     API.get<ICompany[]>(`/stock/list?apikey=${API_KEY}`)
       .then((res: any) => {
         const limitedData = res.data;
         setData(limitedData.slice(0, 20));
-        setFilteredData(data);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
       });
-  }, [data]);
+  }, []);
 
-  const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     var updateList = [...checked];
 
-    if (event.target.checked) {
-      updateList = [...checked, event.target.value];
+    if (e.target.checked) {
+      updateList = [...checked, e.target.value];
     } else {
-      updateList.splice(checked.indexOf(event.target.value), 1);
+      updateList.splice(checked.indexOf(e.target.value), 1);
     }
     setChecked(updateList);
   };
 
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchWord: string = event.target.value;
-    setWordEntered(searchWord);
+    setSearch(searchWord);
 
     const newFilter = data.filter((value: any) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
 
-    if (searchWord === '') {
-      setFilteredData(data);
-    } else {
+    if (searchWord.length > 0) {
       setFilteredData(newFilter);
     }
   };
@@ -63,24 +62,37 @@ export function Home() {
       </Helmet>
       <Header content='Stock Exchange' />
       <Container>
-        <SearchBar
-          handleFilter={handleFilter}
-          wordEntered={wordEntered}
-          checked={checked}
-        />
+        <SearchBar OnChange={handleFilter} value={search} checked={checked} />
       </Container>
       <Container>
         <Table>
-          {filteredData.map((company: ICompany) => {
-            return (
-              <Company
-                symbol={company.symbol}
-                name={company.name}
-                price={`£${company.price}`}
-                handleChecked={handleChecked}
-              />
-            );
-          })}
+          {search.length > 0 ? (
+            <>
+              {filteredData.map((company: ICompany) => {
+                return (
+                  <Company
+                    symbol={company.symbol}
+                    name={company.name}
+                    price={`£${company.price}`}
+                    handleChecked={handleChecked}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <>
+              {data.map((company: ICompany) => {
+                return (
+                  <Company
+                    symbol={company.symbol}
+                    name={company.name}
+                    price={`£${company.price}`}
+                    handleChecked={handleChecked}
+                  />
+                );
+              })}
+            </>
+          )}
         </Table>
       </Container>
     </div>

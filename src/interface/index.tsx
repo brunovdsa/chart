@@ -23,12 +23,21 @@ export interface ICompany {
 }
 
 export interface ISearch {
-  handleFilter: ChangeEventHandler<HTMLInputElement> | undefined;
-  wordEntered: string;
+  OnChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  value: string;
   checked: string[];
 }
 
 export interface IICons {
   id?: any;
   onClick?: (args: any) => void;
+}
+
+export interface IChart {
+  chartType: any;
+  width?: string;
+  height?: string;
+  data: any;
+  options: any;
+  className?: string;
 }

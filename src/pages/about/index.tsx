@@ -1,12 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
+import _ from 'lodash';
+
+import { Charts } from '../../components/Chart';
+import { Container } from '../../components/Container';
 
 import { Header } from '../../components/Header';
 import { API_KEY, API_URL } from '../../services/api';
 
 export function About() {
   const [data, setData] = useState<any>([]);
+  const [companySymbol, setCompanySymbol] = useState<any>('');
+  const [year, setYear] = useState<number>();
+  const [revenue, setRevenue] = useState<number>();
+  const [operatingExpenses, setOperatingExpenses] = useState<number>();
+  const [grossProfit, setGrossProfit] = useState<number>();
+  const [ebitda, setEbitda] = useState<number>();
 
   const id = useParams();
 
@@ -31,8 +41,20 @@ export function About() {
         )
       )
         .then((data) => {
-          console.log(data);
           setData({ data });
+          const mapedData = data.map(
+            (company: any, index: number) => company[index]
+          );
+          mapedData.map(
+            (item: any) => (
+              setCompanySymbol(item.symbol),
+              setRevenue(item.revenue),
+              setYear(item.calendarYear),
+              setOperatingExpenses(item.operatingExpenses),
+              setGrossProfit(item.grossProfit),
+              setEbitda(item.ebitda)
+            )
+          );
         })
         .catch((err) => {
           console.error('Failed to fetch one or more of these URLs:');
@@ -41,7 +63,18 @@ export function About() {
     }, 500);
   }, [id]);
 
-  console.log(data);
+  const options = {
+    chart: {
+      title: companySymbol,
+      subtitle: `Financial statements of ${companySymbol}`,
+    },
+  };
+
+  const chartData = [
+    ['Year', 'Revenue', 'Expenses', 'Profit', 'Ebitda'],
+    [year, revenue, operatingExpenses, grossProfit, ebitda],
+  ];
+
   return (
     <>
       <Helmet>
@@ -49,8 +82,9 @@ export function About() {
         <title>Stock Exchange - Home</title>
       </Helmet>
       <Header content='Stock Exchange' />
-      <h1>Hello About</h1>
-      <div></div>
+      <Container>
+        <Charts chartType={'Bar'} data={chartData} options={options} />
+      </Container>
     </>
   );
 }

@@ -10,8 +10,8 @@ export default function SearchBar(props: ISearch) {
         <input
           type='text'
           placeholder='Search for a company...'
-          value={props.wordEntered}
-          onChange={props.handleFilter}
+          value={props.value}
+          onChange={props.OnChange}
         />
         <SearchIcon />
       </div>
