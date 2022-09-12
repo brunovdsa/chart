@@ -34,10 +34,12 @@ export interface IICons {
 }
 
 export interface IChart {
+  symbol: string;
+  subtitle: number;
   chartType: any;
   width?: string;
   height?: string;
   data: any;
-  options: any;
+  options?: any;
   className?: string;
 }

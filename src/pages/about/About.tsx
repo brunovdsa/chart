@@ -1,27 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
-import _ from 'lodash';
 
-import { Charts } from '../../components/Chart/Chart';
+import { Charts } from '../../components/Chart/Charts';
 import { Container } from '../../components/Container/Container';
 
 import { Header } from '../../components/Header/Header';
 import { API_KEY, API_URL } from '../../services/api/Api';
 
+import './About.scss';
+
 export function About() {
   const [data, setData] = useState<any>([]);
-  const [companySymbol, setCompanySymbol] = useState<any>('');
-  const [year, setYear] = useState<number>();
-  const [revenue, setRevenue] = useState<number>();
-  const [operatingExpenses, setOperatingExpenses] = useState<number>();
-  const [grossProfit, setGrossProfit] = useState<number>();
-  const [ebitda, setEbitda] = useState<number>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const id = useParams();
 
   const formatedId = Object.values(id);
-
   useEffect(() => {
     setTimeout(async () => {
       const symbols = formatedId
@@ -41,39 +36,18 @@ export function About() {
         )
       )
         .then((data) => {
-          setData({ data });
-          const mapedData = data.map(
-            (company: any, index: number) => company[index]
-          );
-          mapedData.map(
-            (item: any) => (
-              setCompanySymbol(item.symbol),
-              setRevenue(item.revenue),
-              setYear(item.calendarYear),
-              setOperatingExpenses(item.operatingExpenses),
-              setGrossProfit(item.grossProfit),
-              setEbitda(item.ebitda)
-            )
-          );
+          setData(data);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.error('Failed to fetch one or more of these URLs:');
           console.error(err);
         });
     }, 500);
+    // eslint-disable-next-line
   }, [id]);
 
-  const options = {
-    chart: {
-      title: companySymbol,
-      subtitle: `Financial statements of ${companySymbol}`,
-    },
-  };
-
-  const chartData = [
-    ['Year', 'Revenue', 'Expenses', 'Profit', 'Ebitda'],
-    [year, revenue, operatingExpenses, grossProfit, ebitda],
-  ];
+  console.log(data);
 
   return (
     <>
@@ -83,7 +57,30 @@ export function About() {
       </Helmet>
       <Header content='Stock Exchange' />
       <Container>
-        <Charts chartType={'Bar'} data={chartData} options={options} />
+        {isLoading && <p>loading...</p>}
+        {data.map((company: any) => {
+          console.log(company);
+          const chartData = [
+            ['Year', 'Revenue', 'Expenses', 'Proffit', 'Ebitda'],
+            [
+              company[0].calendarYear,
+              company[0].revenue,
+              company[0].operatingExpenses,
+              company[0].grossProfit,
+              company[0].ebitda,
+            ],
+          ];
+          return (
+            <div className='charts'>
+              <Charts
+                chartType={'Bar'}
+                data={chartData}
+                symbol={company[0].symbol}
+                subtitle={company[0].calendarYear}
+              />
+            </div>
+          );
+        })}
       </Container>
     </>
   );
