@@ -1,9 +1,29 @@
+import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 import { IChart } from '../../interface/interface';
 
 import './Charts.scss';
 
 export function Charts(props: IChart) {
+  const [screenSize, getDimension] = useState({
+    dynamicWidth: window.innerWidth,
+    dynamicHeight: window.innerHeight,
+  });
+
+  const setDimension = () => {
+    getDimension({
+      dynamicWidth: window.innerWidth,
+      dynamicHeight: window.innerHeight,
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', setDimension);
+    return () => {
+      window.removeEventListener('resize', setDimension);
+    };
+  }, [screenSize]);
+
   const options = {
     chart: {
       title: props.symbol,
@@ -12,7 +32,16 @@ export function Charts(props: IChart) {
     colors: ['#0c4251', '#17657a', '#1c7791', '#218ba8'],
   };
 
-  return (
+  return screenSize.dynamicWidth >= 1000 ? (
+    <Chart
+      chartType={props.chartType}
+      data={props.data}
+      options={options}
+      className='chart'
+      width={'700px'}
+      height={'800px'}
+    />
+  ) : (
     <Chart
       chartType={props.chartType}
       data={props.data}

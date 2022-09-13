@@ -72,12 +72,14 @@ export function About() {
           ];
           return (
             <div className='charts'>
-              <Charts
-                chartType={'Bar'}
-                data={chartData}
-                symbol={company[0].symbol}
-                subtitle={company[0].calendarYear}
-              />
+              {
+                <Charts
+                  chartType={'Bar'}
+                  data={chartData}
+                  symbol={company[0].symbol}
+                  subtitle={company[0].calendarYear}
+                />
+              }
             </div>
           );
         })}

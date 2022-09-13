@@ -1,7 +1,13 @@
 .container {
   flex-direction: column;
-  padding: 2rem 0 !important;
+  padding: 2rem 0;
 }
 .chart {
   margin-bottom: 3rem;
+}
+
+@media (min-width: 1100px) {
+  .container {
+    flex-direction: row;
+  }
 }
