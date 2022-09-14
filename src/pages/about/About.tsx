@@ -8,6 +8,8 @@ import { Container } from '../../components/Container/Container';
 import { Header } from '../../components/Header/Header';
 import { API_KEY, API_URL } from '../../services/api/Api';
 
+import loader from '../../assets/svg/loader.svg';
+
 import './About.scss';
 
 export function About() {
@@ -57,7 +59,14 @@ export function About() {
       </Helmet>
       <Header content='Stock Exchange' />
       <Container>
-        {isLoading && <p>loading...</p>}
+        {isLoading && (
+          <Container>
+            <div className='container-loader'>
+              <img className='loader' src={loader} alt='loding icon' />
+              <span>loading...</span>
+            </div>
+          </Container>
+        )}
         {data.map((company: any) => {
           console.log(company);
           const chartData = [

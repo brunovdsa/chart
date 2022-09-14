@@ -32,14 +32,16 @@ export function Charts(props: IChart) {
     colors: ['#0c4251', '#17657a', '#1c7791', '#218ba8'],
   };
 
-  return screenSize.dynamicWidth >= 1000 ? (
+  console.log(screenSize.dynamicWidth);
+
+  return screenSize.dynamicWidth >= 1100 ? (
     <Chart
       chartType={props.chartType}
       data={props.data}
       options={options}
       className='chart'
-      width={'700px'}
-      height={'800px'}
+      width={'450px'}
+      height={'500px'}
     />
   ) : (
     <Chart
