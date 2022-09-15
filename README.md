@@ -12,6 +12,9 @@ Projeto de estudo, com intuíto de aprimorar boas práticas em React e no conece
 - [Financial Modeling Prep](https://site.financialmodelingprep.com/developer/)
 
 
+## **Link do app rodando**
+- [Stock Exchange](https://stockexchanges.vercel.app/)
+
 ## 🖥 **Preview**
 <p aling="center">
     <img src="src/assets/to_readme/Home.png">    
