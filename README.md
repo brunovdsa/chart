@@ -13,11 +13,41 @@ Projeto de estudo, com intuíto de aprimorar boas práticas em React e no conece
 
 
 ## 🖥 **Preview**
-(Soon)
+<p aling="center">
+    <img src="src/assets/to_readme/Home.png">    
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/OneChart.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/OneChartDetailed.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/MultChart.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/404.png">
+</p>
 
 ## 📱 **Mobile Preview**
-(Soon)
-
+<p aling="center">
+    <img src="src/assets/to_readme/HomeMobile.png">    
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/OneChartMobile.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/OneChartDetailedMobile.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/MultChartMobile1.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/MultChartMobile2.png">
+</p>
+<p aling="center">
+    <img src="src/assets/to_readme/404Mobile.png">
+</p>
 ## Como executar o projeto
 
 ```
