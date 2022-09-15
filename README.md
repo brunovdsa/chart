@@ -23,7 +23,7 @@ Projeto de estudo, com intuíto de aprimorar boas práticas em React e no conece
 ```
 
 Clonar o repositório
-git clone https://github.com/brunovdsa/recipes
+git clone https://github.com/brunovdsa/chart
 
 Baixar as dependências
 npm i
