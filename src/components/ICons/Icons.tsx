@@ -1,5 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamation,
+  faMagnifyingGlass,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { IICons } from '../../interface/interface';
 
 export function SearchIcon(props: IICons) {
@@ -15,5 +19,15 @@ export function SearchIcon(props: IICons) {
 export function CloseIcon(props: IICons) {
   return (
     <FontAwesomeIcon id={props.id} icon={faXmark} className='close-icon' />
+  );
+}
+
+export function AlertIcon(props: IICons) {
+  return (
+    <FontAwesomeIcon
+      id={props.id}
+      icon={faExclamation}
+      className='alert-icon'
+    />
   );
 }
