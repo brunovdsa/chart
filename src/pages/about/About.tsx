@@ -55,7 +55,7 @@ export function About() {
     <>
       <Helmet>
         <meta charSet='utf-8' />
-        <title>Stock Exchange - Home</title>
+        <title>Stock Exchange - About</title>
       </Helmet>
       <Header content='Stock Exchange' />
       <Container>
