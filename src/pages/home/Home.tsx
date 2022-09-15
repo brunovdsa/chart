@@ -23,7 +23,7 @@ export function Home() {
     API.get<ICompany[]>(`/stock/list?apikey=${API_KEY}`)
       .then((res: any) => {
         const limitedData = res.data;
-        setData(limitedData.slice(0, 20));
+        setData(limitedData.slice(1, 20));
       })
       .catch((err: any) => {
         console.log(err);
